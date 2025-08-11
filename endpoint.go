@@ -33,6 +33,7 @@ func (a EndpointAddress) String() string {
 // EndpointDesc contains the information about an interface endpoint, extracted
 // from the descriptor.
 type EndpointDesc struct {
+	ep libusbEndpoint
 	// Address is the unique identifier of the endpoint within the interface.
 	Address EndpointAddress
 	// Number represents the endpoint number. Note that the endpoint number is different from the
@@ -55,6 +56,38 @@ type EndpointDesc struct {
 	IsoSyncType IsoSyncType
 	// UsageType is the isochronous or interrupt endpoint usage type, as defined by USB spec.
 	UsageType UsageType
+}
+
+func (e EndpointDesc) BLength() uint8 {
+	return uint8(e.ep.bLength)
+}
+
+func (e EndpointDesc) BDescriptorType() uint8 {
+	return uint8(e.ep.bDescriptorType)
+}
+
+func (e EndpointDesc) BEndpointAddress() uint8 {
+	return uint8(e.ep.bEndpointAddress)
+}
+
+func (e EndpointDesc) BmAttributes() uint8 {
+	return uint8(e.ep.bmAttributes)
+}
+
+func (e EndpointDesc) WMaxPacketSize() uint16 {
+	return uint16(e.ep.wMaxPacketSize)
+}
+
+func (e EndpointDesc) BInterval() uint8 {
+	return uint8(e.ep.bInterval)
+}
+
+func (e EndpointDesc) BRefresh() uint8 {
+	return uint8(e.ep.bRefresh)
+}
+
+func (e EndpointDesc) BSynchAddress() uint8 {
+	return uint8(e.ep.bSynchAddress)
 }
 
 // String returns the human-readable description of the endpoint.

@@ -43,6 +43,7 @@ type libusbEndpoint C.struct_libusb_endpoint_descriptor
 
 func (ep libusbEndpoint) endpointDesc(dev *DeviceDesc) EndpointDesc {
 	ei := EndpointDesc{
+		ep:            ep,
 		Address:       EndpointAddress(ep.bEndpointAddress),
 		Number:        int(ep.bEndpointAddress & endpointNumMask),
 		Direction:     EndpointDirection((ep.bEndpointAddress & endpointDirectionMask) != 0),
